@@ -65,6 +65,8 @@ public final class SelfStudyStartActivity extends AbstractActivity {
     private final ViewProxy searchForm = new ViewProxy();
     private final ViewProxy searchButton1 = new ViewProxy();
     private final ViewProxy searchButton2 = new ViewProxy();
+    private final ViewProxy aiStoryButton = new ViewProxy();
+
 
     /**
      * The constructor.
@@ -104,6 +106,30 @@ public final class SelfStudyStartActivity extends AbstractActivity {
         searchForm.setDelegate(this, R.id.searchForm);
         searchButton1.setDelegate(this, R.id.searchButton1);
         searchButton2.setDelegate(this, R.id.searchButton2);
+
+        aiStoryButton.setDelegate(this, R.id.button_ai_story);
+        aiStoryButton.setOnClickListener(v -> safe(() -> {
+            if (!interactionEnabled) {
+                return;
+            }
+            disableInteraction();
+
+            final @Nullable AdvancedSearchParameters searchParameters = searchForm.extractParameters();
+            if (searchParameters != null) {
+                runAsync(this, () -> {
+                    final List<Subject> subjects = SearchUtil.searchSubjects(2,
+                            Converters.getObjectMapper().writeValueAsString(searchParameters));
+                    return subjects;
+                }, result -> {
+                    if (result == null || result.isEmpty()) {
+                        Toast.makeText(this, "No subjects found for AI Story Mode!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        AIStoryActivity.start(this, result);
+                    }
+                });
+            }
+        }));
+
 
         final View.OnClickListener listener = v -> safe(() -> {
             if (!interactionEnabled) {

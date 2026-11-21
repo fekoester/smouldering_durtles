@@ -132,6 +132,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"/>
 
+            <Button
+                android:id="@+id/button_ai_story"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="AI Story Mode"
+                style="@style/WK.Button.Normal"/>
+
+
         </LinearLayout>
 
     </ScrollView>
