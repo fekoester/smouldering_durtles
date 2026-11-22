@@ -315,4 +315,28 @@
         <item>COMPACT</item>
         <item>COMPACT_NO_PROGRESSION</item>
     </string-array>
+
+    <string-array name="aiProviders">
+        <item>OpenAI</item>
+        <item>Anthropic (Claude)</item>
+        <item>Google Gemini</item>
+    </string-array>
+
+    <string-array name="aiProviderValues">
+        <item>OPENAI</item>
+        <item>ANTHROPIC</item>
+        <item>GEMINI</item>
+    </string-array>
+
+    <string-array name="aiStoryLengths">
+        <item>Short (5 sentences)</item>
+        <item>Medium (8 sentences)</item>
+        <item>Long (12 sentences)</item>
+    </string-array>
+
+    <string-array name="aiStoryLengthValues">
+        <item>5</item>
+        <item>8</item>
+        <item>12</item>
+    </string-array>
 </resources>

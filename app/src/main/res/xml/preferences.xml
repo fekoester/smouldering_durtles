@@ -80,6 +80,72 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        app:key="ai_settings"
+        app:title="AI settings"
+        app:summary="Provider and API key for AI Story Mode">
+
+        <com.smouldering_durtles.wk.components.InfoPreference
+            app:title="About the AI features"
+            app:key="ai_info"
+            app:summary="AI Story Mode sends the selected kanji and vocabulary, with their readings, meanings and your level, to the provider you choose here. Nothing else from your account is sent. You use your own API key; the provider bills you for the requests. Keys are stored encrypted on this device and are not part of the settings export."/>
+
+        <ListPreference
+            app:key="ai_provider"
+            app:title="AI provider"
+            app:singleLineTitle="false"
+            app:entries="@array/aiProviders"
+            app:entryValues="@array/aiProviderValues"
+            app:defaultValue="OPENAI"
+            app:useSimpleSummaryProvider="true"/>
+
+        <com.smouldering_durtles.wk.components.EncryptedEditTextPreference
+            app:key="ai_key_openai"
+            app:title="OpenAI API key"
+            app:singleLineTitle="false"/>
+
+        <EditTextPreference
+            app:key="ai_model_openai"
+            app:title="OpenAI model"
+            app:singleLineTitle="false"
+            app:defaultValue="gpt-4.1-mini"
+            app:useSimpleSummaryProvider="true"/>
+
+        <com.smouldering_durtles.wk.components.EncryptedEditTextPreference
+            app:key="ai_key_anthropic"
+            app:title="Anthropic (Claude) API key"
+            app:singleLineTitle="false"/>
+
+        <EditTextPreference
+            app:key="ai_model_anthropic"
+            app:title="Anthropic model"
+            app:singleLineTitle="false"
+            app:defaultValue="claude-opus-5-5"
+            app:useSimpleSummaryProvider="true"/>
+
+        <com.smouldering_durtles.wk.components.EncryptedEditTextPreference
+            app:key="ai_key_gemini"
+            app:title="Google Gemini API key"
+            app:singleLineTitle="false"/>
+
+        <EditTextPreference
+            app:key="ai_model_gemini"
+            app:title="Gemini model"
+            app:singleLineTitle="false"
+            app:defaultValue="gemini-3.8-flash"
+            app:useSimpleSummaryProvider="true"/>
+
+        <ListPreference
+            app:key="ai_story_length"
+            app:title="Story length"
+            app:singleLineTitle="false"
+            app:entries="@array/aiStoryLengths"
+            app:entryValues="@array/aiStoryLengthValues"
+            app:defaultValue="8"
+            app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
         app:key="display_settings"
         app:title="Display settings">
 

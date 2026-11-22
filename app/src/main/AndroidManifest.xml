@@ -133,6 +133,11 @@
             android:parentActivityName=".activities.MainActivity">
             <meta-data android:name="android.app.default_searchable" android:value=".activities.BrowseActivity"/>
         </activity>
+        <activity android:name=".activities.AIStoryActivity"
+            android:label="AI story"
+            android:parentActivityName=".activities.SelfStudyStartActivity">
+            <meta-data android:name="android.app.default_searchable" android:value=".activities.BrowseActivity"/>
+        </activity>
         <activity android:name=".activities.FontSelectionActivity"
             android:label="Font selection"
             android:parentActivityName=".activities.MainActivity">

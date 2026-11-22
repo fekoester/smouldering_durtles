@@ -115,19 +115,19 @@ public final class SelfStudyStartActivity extends AbstractActivity {
             disableInteraction();
 
             final @Nullable AdvancedSearchParameters searchParameters = searchForm.extractParameters();
-            if (searchParameters != null) {
-                runAsync(this, () -> {
-                    final List<Subject> subjects = SearchUtil.searchSubjects(2,
-                            Converters.getObjectMapper().writeValueAsString(searchParameters));
-                    return subjects;
-                }, result -> {
-                    if (result == null || result.isEmpty()) {
-                        Toast.makeText(this, "No subjects found for AI Story Mode!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        AIStoryActivity.start(this, result);
-                    }
-                });
+            if (searchParameters == null) {
+                enableInteraction();
+                return;
             }
+            runAsync(this, () -> SearchUtil.searchSubjects(2,
+                    Converters.getObjectMapper().writeValueAsString(searchParameters)), result -> {
+                enableInteraction();
+                if (result == null || result.isEmpty()) {
+                    Toast.makeText(this, "No subjects found for AI Story Mode!", Toast.LENGTH_SHORT).show();
+                } else if (AIStoryActivity.start(this, result) == 0) {
+                    Toast.makeText(this, "AI Story Mode needs kanji or vocabulary, not only radicals.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }));
 
 

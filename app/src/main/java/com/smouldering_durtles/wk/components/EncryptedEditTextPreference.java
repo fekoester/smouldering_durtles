@@ -87,12 +87,27 @@ public final class EncryptedEditTextPreference extends EditTextPreference implem
     private void init() {
         setPreferenceDataStore(store);
         setOnBindEditTextListener(this);
+        if (isAiKey(getKey())) {
+            // Never show an AI API key in the settings list: only whether it is set, and its last 4 characters.
+            setSummaryProvider(preference -> {
+                final @Nullable String value = getText();
+                if (value == null || value.trim().isEmpty()) {
+                    return "Not set";
+                }
+                final String trimmed = value.trim();
+                return "Set (…" + trimmed.substring(Math.max(0, trimmed.length() - 4)) + ")";
+            });
+        }
+    }
+
+    private static boolean isAiKey(final @Nullable String key) {
+        return key != null && key.startsWith("ai_key_");
     }
 
     @Override
     public void onBindEditText(final EditText editText) {
         final @Nullable String key = getKey();
-        if (key != null && key.equals("web_password")) {
+        if (key != null && (key.equals("web_password") || isAiKey(key))) {
             editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
     }
